@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 // import { FaCheck } from "react-icons/fa";
 import CourseInformation from "./CourseInformation/CourseInformation";
+import CourseBuilderForm from "./CourseBuilder/CourseBuilderForm";
+import PublishCourse from "./PublishCourse/index"
 const RenderSteps = () => {
   const { step } = useSelector((state) => state.course);
   console.log("step value ->", step);
@@ -25,7 +27,7 @@ const RenderSteps = () => {
         <div>
           {steps.map((items,index) => (
             <>
-              <div>
+              <div key={index}>
                 <div
                   className={`${
                     step == items.id
@@ -43,10 +45,10 @@ const RenderSteps = () => {
         </div>
         <div>
          {
-          steps.map((item)=>(
+          steps.map((item,index)=>(
        
-            <div>
-              <p>{item.title}</p>
+            <div key={index}>
+              <p key={index}>{item.title}</p>
               </div>  
           ))
          }
@@ -55,12 +57,12 @@ const RenderSteps = () => {
       {
         step==1 && <CourseInformation />
       }
-      {/* {
+      {
         step==2 && <CourseBuilderForm />
       }
       {
-        step==3 && <Publish />
-      } */}
+        step==3 && <PublishCourse />
+      } 
     </>
   );
 };

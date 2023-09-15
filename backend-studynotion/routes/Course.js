@@ -6,6 +6,8 @@ const {
   createCourse,
   getAllCourses,
   getCourseDetails,
+  editCourse,
+  getInstructorCourses
 } = require("../controllers/Course");
 
 // categories controller import
@@ -27,7 +29,7 @@ const {
     createSubSection,
     updateSubSection,
     deleteSubSection,
-  } = require("../controllers/Subsection")
+  } = require("../controllers/SubSection")
 
 // Rating Controllers Import
 const {
@@ -57,6 +59,9 @@ router.post("/addSubSection", auth, isInstructor, createSubSection)
 router.get("/getAllCourses", getAllCourses)
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", getCourseDetails)
+router.post("/editCourse", editCourse)
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+// 
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)

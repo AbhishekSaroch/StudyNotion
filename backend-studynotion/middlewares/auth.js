@@ -19,16 +19,18 @@ exports.auth=async(req,res,next)=>{
             console.log(decode)
             req.user=decode
         } catch (error) {
+            console.log("Error From Auuth",error)
             return res.status(401).json({
                 success:false,
-                message:"Ye chal rha hai bro"
+
+                message:"Ye chal rha hai bro !!!!!!",
             })
         }
         next();
     } catch (error) {
         return res.status(500).json({
             success:false,
-            message:"Something went wrong while validatin the token"
+            message:"Something went wrong while validating the token"
         })
     }
 }
@@ -51,7 +53,7 @@ exports.isStudent=async(req,res,next)=>{
 }
 exports.isInstructor=async(req,res,next)=>{
     try {
-        if(req.user.accountType!=="Instructot"){
+        if(req.user.accountType!=="Instructor"){
             return res.status(401).json({
                 success:false,
                 message:"Protected routes for Instructor only !!"
