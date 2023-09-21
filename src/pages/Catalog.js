@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { apiConnector } from "../services/apiconnector";
 import { categories } from "../services/apis";
+import CourseSlider from "../components/core/Catalog/CourseSlider";
+import Course_Card from "../components/core/Catalog/Course_Card";
 const Catalog = () => {
   const { catalogName } = useParams();
   const [catalogPageData, setCatalogPageData] = useState(null);
@@ -37,18 +39,27 @@ const Catalog = () => {
             <p>Most Popular</p>
             <p>New</p>
           </div>
-          {/* <CourseSlider /> */}
+          <CourseSlider Coureses={catalogPageData?.data?.setCategory?.courses}/>
         </div>
         {/* SECTION 2 */}
         <div>
           <p>Top Courses</p>
           <div>
-            {/* <CourseSlider /> */}
+            <CourseSlider Coureses={catalogPageData?.data?.differentCategory?.courses}/>
           </div>
         </div>
         {/* section 3 */}
         <div>
-          <p>Frequently Bought Together</p>
+          <div>Frequently Bought</div>
+          <div className="py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {
+                catalogPageData?.data?.mostSellingCourses?.slice(0,4).map((course,index)=>{
+                  <Course_Card key={index} course={course} />
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
