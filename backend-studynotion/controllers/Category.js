@@ -1,5 +1,7 @@
 const Category = require("../models/Category");
-
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max)
+}
 exports.createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
@@ -50,12 +52,9 @@ exports.categoryPageDetails = async (req, res) => {
     console.log("PRINTING CATEGORY ID: ", categoryId);
     // Get courses for the specified category
     const selectedCategory = await Category.findById(categoryId)
-      .populate({
-        path: "courses",
-        match: { status: "Published" },
-        populate: "ratingAndReviews",
-      })
-      .exec()
+    console.log("Selected Category Course Lenght",selectedCategory.courses.length)
+
+      console.log("Selected Category is",selectedCategory)
 
     //console.log("SELECTED COURSE", selectedCategory)
     // Handle the case when the category is not found
@@ -70,7 +69,7 @@ exports.categoryPageDetails = async (req, res) => {
       console.log("No courses found for the selected category.")
       return res.status(404).json({
         success: false,
-        message: "No courses found for the selected category.",
+        message: "No courses found for the selected category . Try Again Later......",
       })
     }
 

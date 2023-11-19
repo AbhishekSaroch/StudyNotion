@@ -49,14 +49,10 @@ const App = () => {
   )
 }
 </Route>
-
-
-        
-       
         <Route path="*" element={<Error />}/>
       </Routes>
     </div>
   );
 };
 
-export default App;
+export default App
